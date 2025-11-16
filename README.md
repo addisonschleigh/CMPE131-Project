@@ -8,4 +8,4 @@ LearnQuest is a full stack learning management system designed to make learning 
 - **Forms**: WTForms and Flask-WTF
 - **Frontend**: HTML and CSS
 - **Version Control**: Git and GitHub
-- **Development Envionment**: PyCharm
+- **Development Environment**: PyCharm
