@@ -23,3 +23,6 @@ Screenshot of rendered page (This is after Login POST): <img width="1917" height
 ## Login Page UI Sketch
 <img width="1488" height="988" alt="LearnQuest - Login Page" src="https://github.com/user-attachments/assets/33e783eb-edd5-4fc0-a492-db97d931f241" />
 
+## Dashboard UI Sketch
+<img width="1488" height="2052" alt="LearnQuest - Dashboard-2" src="https://github.com/user-attachments/assets/6ff3b8d7-69d3-49ac-90d1-13f54f04fad7" />
+
