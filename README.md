@@ -14,3 +14,6 @@ Screenshot of rendered page (This is after Login POST): <img width="1917" height
 
 ## Home Screen
 <img width="1488" height="988" alt="LearnQuest - Homepage" src="https://github.com/user-attachments/assets/c168b119-34a4-4a5f-b6bc-e460abbc4112" />
+
+## Feature Page
+<img width="1488" height="1182" alt="LearnQuest - Feature Page" src="https://github.com/user-attachments/assets/f1aa650f-cb20-4377-936c-f074cc20ffac" />
