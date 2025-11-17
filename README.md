@@ -10,7 +10,11 @@ LearnQuest is a full stack learning management system designed to make learning 
 - **Version Control**: Git and GitHub
 - **Development Environment**: PyCharm
 
-Screenshot of rendered page (This is after Login POST): <img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
+## Setup and Run
+In order to set up and run this program, be sure to use git clone to get the repository and use the files, then be sure that all extensions mentioned in requirements.txt are installed, and to run it, put python run.py (or python3 run.py) into the terminal
+
+## Screenshot of rendered page (This is after Login POST):
+<img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
 
 
 
