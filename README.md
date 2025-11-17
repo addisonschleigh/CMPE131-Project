@@ -40,4 +40,4 @@ In order to set up and run this program:
 ## Meet Our Team
 - **Project Manager/UI Developer**: Abdullah Ahmed
 - **Main Programmer**: Addison Schleigh
-- **Software Engineer**:
+- **Software Engineer**: Kenneth Lau
