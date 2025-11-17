@@ -14,7 +14,7 @@ LearnQuest is a full stack learning management system designed to make learning 
 In order to set up and run this program:
 1. Navigate to desired directory to clone directory
 2. Clone this directory (git clone https://github.com/addisonschleigh/CMPE131-Project.git)
-3. Make sure all extensions, as seen in requirements.txt, needed are installed
+3. Make sure all extensions needed, as seen in requirements.txt, are installed
 4. Run program in the repository typing python run.py (or python3 run.py) into the terminal
 
 ## Screenshot of rendered page (This is after Login POST):
