@@ -26,5 +26,5 @@ Screenshot of rendered page (This is after Login POST): <img width="1917" height
 ## Dashboard UI Sketch
 <img width="1488" height="2052" alt="LearnQuest - Dashboard-2" src="https://github.com/user-attachments/assets/6ff3b8d7-69d3-49ac-90d1-13f54f04fad7" />
 
-- Used Visely AI for the UI sketches but I drew them by hand first
-
+- Used Visily AI for the UI sketches but I drew them by hand first
+- [(https://www.visily.ai/)]
