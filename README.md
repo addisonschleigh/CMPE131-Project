@@ -32,3 +32,6 @@ In order to set up and run this program, be sure to use git clone to get the rep
 
 - Used Visily AI for the UI sketches but I drew them by hand first
 - [(https://www.visily.ai/)]
+
+## Meet Our Team
+- **Project Manager**: Abdullah Ahmed
