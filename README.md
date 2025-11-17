@@ -34,4 +34,5 @@ In order to set up and run this program, be sure to use git clone to get the rep
 - [(https://www.visily.ai/)]
 
 ## Meet Our Team
-- **Project Manager**: Abdullah Ahmed
+- **Project Manager/UI Developer**: Abdullah Ahmed
+- **Software Engineer**:
