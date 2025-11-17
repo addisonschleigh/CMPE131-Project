@@ -13,4 +13,4 @@ LearnQuest is a full stack learning management system designed to make learning 
 Screenshot of rendered page (This is after Login POST): <img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
 
 ### Home Screen
-![Home] <img width="1488" height="988" alt="LearnQuest - Homepage" src="https://github.com/user-attachments/assets/c168b119-34a4-4a5f-b6bc-e460abbc4112" />
+<img width="1488" height="988" alt="LearnQuest - Homepage" src="https://github.com/user-attachments/assets/c168b119-34a4-4a5f-b6bc-e460abbc4112" />
