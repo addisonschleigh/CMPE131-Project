@@ -9,3 +9,35 @@ LearnQuest is a full stack learning management system designed to make learning 
 - **Frontend**: HTML and CSS
 - **Version Control**: Git and GitHub
 - **Development Environment**: PyCharm
+
+## Setup and Run
+In order to set up and run this program:
+1. Navigate to desired directory to clone directory
+2. Clone this directory (git clone https://github.com/addisonschleigh/CMPE131-Project.git)
+3. Make sure all extensions needed, as seen in requirements.txt, are installed
+4. Run program in the repository typing python run.py (or python3 run.py) into the terminal
+
+## Screenshot of rendered page (This is after Login POST):
+<img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
+
+
+
+## Home Screen UI Sketch
+<img width="1488" height="988" alt="LearnQuest - Homepage" src="https://github.com/user-attachments/assets/c168b119-34a4-4a5f-b6bc-e460abbc4112" />
+
+## Feature Page UI Sketch
+<img width="1488" height="1182" alt="LearnQuest - Feature Page" src="https://github.com/user-attachments/assets/f1aa650f-cb20-4377-936c-f074cc20ffac" />
+
+## Login Page UI Sketch
+<img width="1488" height="988" alt="LearnQuest - Login Page" src="https://github.com/user-attachments/assets/33e783eb-edd5-4fc0-a492-db97d931f241" />
+
+## Dashboard UI Sketch
+<img width="1488" height="2052" alt="LearnQuest - Dashboard-2" src="https://github.com/user-attachments/assets/6ff3b8d7-69d3-49ac-90d1-13f54f04fad7" />
+
+- Used Visily AI for the UI sketches but I drew them by hand first
+- [(https://www.visily.ai/)]
+
+## Meet Our Team
+- **Project Manager/UI Developer**: Abdullah Ahmed
+- **Main Programmer**: Addison Schleigh
+- **Software Engineer**: Kenneth Lau
