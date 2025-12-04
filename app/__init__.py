@@ -1,7 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .auth import auth_bp
-from .main import main_bp
 import os
 from .config import Config
 
@@ -15,11 +13,17 @@ def create_app():
 
     myapp_obj.config.from_object(Config)
 
+    db.init_app(myapp_obj)
+
+    from . import models
+
+    from .auth import auth_bp
+    from .main import main_bp
+
     myapp_obj.register_blueprint(auth_bp, url_prefix='/auth')
     myapp_obj.register_blueprint(main_bp)
 
 
-    db.init_app(myapp_obj)
     with myapp_obj.app_context():
         db.create_all()
 

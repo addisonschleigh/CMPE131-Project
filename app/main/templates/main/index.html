@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome to LearnQuest!</h1>
+    <h1 class="dashboard">Welcome to LearnQuest!</h1>
+    {% if courses %}
+    {% for key,value in courses.items() %}
+        <ul>
+            <li class="dashboard"><a href="course1">{{ key }}, {{ value }}</a></li>
+        </ul>
+    {% endfor %}
+    {% else %}
     <ul>
-        <li>Course 1</li>
-        <li>Course 2</li>
-         <li>Course 3</li>
+        <li class="dashboard"><a href="course1">Course 1</a></li>
+        <li class="dashboard">Course 2</li>
+         <li class="dashboard">Course 3</li>
     </ul>
+    {% endif %}
 {% endblock %}

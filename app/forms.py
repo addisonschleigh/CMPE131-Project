@@ -7,3 +7,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password')
     remember_me = BooleanField('Remember me')
     submit = SubmitField('Sign in')
+
+class CourseForm(FlaskForm):
+    name = StringField('Course Name', validators=[DataRequired()])
+    section = StringField('Section', validators=[DataRequired()])
+    submit = SubmitField('Create Course')

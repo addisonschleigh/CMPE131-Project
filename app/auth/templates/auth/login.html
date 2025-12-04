@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Sign in</h1>
+<h1 class="login">Sign in</h1>
+    <div class="login">
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
-        <p>
+        <p class="login">
             {{ form.username.label }} <br>
             {{ form.username(size=32) }}
 
         </p>
 
-         <p> {{form.password.label}} <br>
+         <p class="login"> {{form.password.label}} <br>
             {{form.password(size=32)}}</p>
 
-        <p> {{form.remember_me.label}} <br>
+        <p class="login"> {{form.remember_me.label}} <br>
        {{form.remember_me()}}</p>
 
-    <p>{{form.submit()}}</p>
+    <p class="login">{{form.submit()}}</p>
     </form>
+    </div>
 {% endblock %}

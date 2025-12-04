@@ -1,0 +1,7 @@
+div.login {
+    color: red;
+    border: solid black;
+    border-radius: 10px;
+    display: inline-block;
+    width: auto;
+}
