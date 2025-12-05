@@ -5,3 +5,18 @@ div.login {
     display: inline-block;
     width: auto;
 }
+
+.classes{
+    list-style-type: none; /* Removes bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+li.classes{
+    flex: 1;
+    margin: 5px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    text-align: center
+}

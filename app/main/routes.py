@@ -14,6 +14,6 @@ courses = {}
 def hello():
     return render_template('main/index.html', courses=courses)
 
-@main_bp.route('/course1')
-def feature():
-    return render_template('main/feature.html', course="Course 1", assignments=["Assignment 1", "Assignment 2"])
+@main_bp.route('/course/<course_name>')
+def feature(course_name):
+    return render_template('main/feature.html', course=course_name, assignments=["Assignment 1", "Assignment 2"])

@@ -4,15 +4,11 @@
     <h1 class="dashboard">Welcome to LearnQuest!</h1>
     {% if courses %}
     {% for key,value in courses.items() %}
-        <ul>
-            <li class="dashboard"><a href="course1">{{ key }}, {{ value }}</a></li>
+        <ul class="classes">
+            <li class="classes"><a href="{{ url_for('main.feature', course_name=key) }}">{{ key }}, Section {{ value }}</a></li>
         </ul>
     {% endfor %}
     {% else %}
-    <ul>
-        <li class="dashboard"><a href="course1">Course 1</a></li>
-        <li class="dashboard">Course 2</li>
-         <li class="dashboard">Course 3</li>
-    </ul>
+        <h2>Please Create Course to view Courses</h2>
     {% endif %}
 {% endblock %}

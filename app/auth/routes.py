@@ -1,6 +1,6 @@
 from . import auth_bp
 from flask import render_template, flash, redirect
-from ..forms import LoginForm, CourseForm
+from ..forms import LoginForm, CourseForm, AssignmentForm
 from ..main.routes import courses
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -21,3 +21,8 @@ def course_add():
         courses[course_name] = course_section
         return redirect('/')
     return render_template('auth/course_add.html', form=form)
+
+@auth_bp.route("/course/<course_name>/assignment_add", methods=["GET", "POST"])
+def assignment_add(course_name):
+    form = AssignmentForm()
+    return render_template('auth/assignment_add.html', form=form, course=course_name)
