@@ -32,7 +32,7 @@ def assignment_add(course_name, section_name):
             'name': assignment_name,
             "points": assignment_points
         })
-        return redirect('/course/' + course_name)
+        return redirect('/course/' + course_name + '/' + section_name)
     print(form.errors)
     print(request.form.get('due_date'))
     return render_template('auth/assignment_add.html', form=form, course=course_name, section=section_name)
