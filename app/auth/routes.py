@@ -9,9 +9,6 @@ from .. import db
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     #abc = {'name': 'User'}
-    if current_user.is_authenticated:
-        return redirect(url_for('main.hello'))
-
     form = LoginForm()
     if form.validate_on_submit():
         # We want to be able to look up the user by their username
@@ -22,6 +19,11 @@ def login():
             return redirect(url_for('main.hello'))
         else:
             flash('Login unsuccessful. Please check username and password.', category='error')
+
+    # Now check if the user is authenticated after the form submission
+    if current_user.is_authenticated:
+        return redirect(url_for('main.hello'))
+
     return render_template('auth/login.html', form=form)
 
 @auth_bp.route("/logout")
@@ -36,8 +38,15 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         existing_user = User.query.filter_by(username=form.username.data).first()
+        # Check existing username
         if existing_user:
             flash('Username already taken. Please choose a different one.')
+            return render_template("auth/register.html", form=form)
+
+        # Check existing email
+        existing_email = User.query.filter_by(email=form.email.data).first()
+        if existing_email:
+            flash('Email already taken. Please choose a different one.', category='error')
             return render_template("auth/register.html", form=form)
 
          # create a new user
