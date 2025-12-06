@@ -7,7 +7,10 @@
         <p>To Do</p>
         {% for assignment in assignments %}
             <ul>
-                <li class="course">{{ assignment.name }}, Worth {{ assignment.points }} points</li>
+                <li class="course">
+                    <a href="{{ url_for('main.assignment', course_name=course, section_name=section,
+                    assignment_name=assignment.name, assignment_points=assignment.points) }}">
+                        {{ assignment.name }}, Worth {{ assignment.points }} points</a></li>
             </ul>
         {% endfor %}
     {% endif %}

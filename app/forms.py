@@ -18,4 +18,4 @@ class AssignmentForm(FlaskForm):
     name = StringField('Assignment Name', validators=[DataRequired()])
     points = IntegerField('Assignment Points', validators=[DataRequired()])
 #    due_date = DateTimeLocalField('Assignment Due Date', format='%y-%m-%d%H:%M:%S', validators=[Optional()], default=datetime.datetime.now)
-    submit = SubmitField('Assign Course')
+    submit = SubmitField('Create Assignment')
