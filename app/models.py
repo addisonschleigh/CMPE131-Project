@@ -16,4 +16,4 @@ class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     points = db.Column(db.Integer, nullable=False)
-    due_date = db.Column(db.DateTime, nullable=False)
+#    due_date = db.Column(db.DateTime, nullable=False)

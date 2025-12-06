@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="course">{{course}}</h1>
-    <a href="/auth/course/{{ course }}/assignment_add">Add Assignment</a>
-    <p>To Do</p>
-    {% for assignment in assignments %}
-        <ul>
-            <li class="course">{{ assignment }}</li>
-        </ul>
-    {% endfor %}
+    <h1 class="course">{{course}}, Section {{ section }}</h1>
+    <a href="/auth/course/{{ course }}/{{ section }}/assignment_add">Add Assignment</a>
+    {% if assignments %}
+        <p>To Do</p>
+        {% for assignment in assignments %}
+            <ul>
+                <li class="course">{{ assignment.name }}, Worth {{ assignment.points }} points</li>
+            </ul>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

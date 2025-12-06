@@ -3,11 +3,11 @@
 {% block content %}
     <h1 class="dashboard">Welcome to LearnQuest!</h1>
     {% if courses %}
+        <div class="classes">
     {% for key,value in courses.items() %}
-        <ul class="classes">
-            <li class="classes"><a href="{{ url_for('main.feature', course_name=key) }}">{{ key }}, Section {{ value }}</a></li>
-        </ul>
+            <a href="{{ url_for('main.feature', course_name=key, section_name=value) }}"><div class="class"> {{ key }}, Section {{ value }}</div></a>
     {% endfor %}
+        </div>
     {% else %}
         <h2>Please Create Course to view Courses</h2>
     {% endif %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="assignment_add">Create Assignment for {{ course }}</h1>
+<h1 class="assignment_add">Create Assignment for {{ course }}, Section {{ section }}</h1>
     <div class="assignment-add">
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
@@ -13,9 +13,6 @@
 
          <p class="assignment-add"> {{form.points.label}} <br>
             {{form.points(size=32)}}</p>
-
-         <p class="assignment-add"> {{form.due_date.label}} <br>
-            {{form.due_date(class="form-control")}}</p>
 
     <p class="assignment-add">{{form.submit()}}</p>
     </form>
