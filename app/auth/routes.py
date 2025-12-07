@@ -28,11 +28,12 @@ def assignment_add(course_name, section_name):
     if form.validate_on_submit():
         assignment_name = form.name.data
         assignment_points = form.points.data
+        # store a dict including section so deletions can be specific
         assignments_by_course.setdefault(course_name, []).append({
             'name': assignment_name,
-            "points": assignment_points
+            'points': assignment_points,
+            'section': section_name
         })
-        return redirect('/course/' + course_name + '/' + section_name)
-    print(form.errors)
-    print(request.form.get('due_date'))
+        return redirect(url_for('main.feature', course_name=course_name, section_name=section_name))
+
     return render_template('auth/assignment_add.html', form=form, course=course_name, section=section_name)

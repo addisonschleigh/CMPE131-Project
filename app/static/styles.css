@@ -1,9 +1,87 @@
-div.login {
-    color: red;
-    border: solid black;
-    border-radius: 10px;
-    display: inline-block;
-    width: auto;
+.login, .class-add, .assignment-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Login card */
+.login-container,
+.course-container,
+.assignment-container {
+    width: 380px;
+    padding: 25px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings like "Sign in" */
+h1.login, h1.class-add, h1.assignment-add {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Form spacing */
+p.login, p.class-add, h1.assignment-add {
+    width: 100%;
+    margin-bottom: 18px;
+    color: #333;
+    font-size: 15px;
+}
+
+/* Inputs from WTForms */
+.login, .class-add, .assignment-add input[type="text"],
+.login, .class-add, .assignment-add input[type="password"],
+.login, .class-add, .assignment-add input[type="number"],
+.login, .class-add, .assignment-add input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+.login input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.class-add input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.assignment-add input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login .class-add, .assignment-add input[type="submit"]:hover {
+    background: #0069d9;
 }
 
 .classes{

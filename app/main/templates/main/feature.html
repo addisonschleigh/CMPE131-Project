@@ -2,6 +2,11 @@
 
 {% block content %}
     <h1 class="course">{{course}}, Section {{ section }}</h1>
+    <form method="post" action="{{ url_for('main.delete_course', course_name=course, section_name=section) }}"
+        onsubmit="return confirm('Really delete course? This cannot be undone.');">
+        <button type="submit" class="btn btn-danger">Delete Course</button>
+    </form>
+    <br>
     <a href="/auth/course/{{ course }}/{{ section }}/assignment_add">Add Assignment</a>
     {% if assignments %}
         <p>To Do</p>

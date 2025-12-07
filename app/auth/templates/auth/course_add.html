@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="class_add">Course add</h1>
+<h1 class="class-add">Course add/edit</h1>
     <div class="class-add">
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
@@ -14,7 +14,7 @@
          <p class="class-add"> {{form.section.label}} <br>
             {{form.section(size=32)}}</p>
 
-    <p class="class-add">{{form.submit()}}</p>
+    <p class="class-add" class="btn-primary">{{form.submit()}}</p>
     </form>
     </div>
 {% endblock %}
