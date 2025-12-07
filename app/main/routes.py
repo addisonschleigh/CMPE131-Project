@@ -9,6 +9,7 @@ from ..models import User
 
 courses = {}
 assignments_by_course = {}
+completed_assignments_by_course = {}
 
 @main_bp.route('/')
 # view functions
@@ -18,7 +19,8 @@ def index():
 @main_bp.route('/course/<course_name>/<section_name>')
 def feature(course_name, section_name):
     course_assignments = assignments_by_course.get(course_name, [])
-    return render_template('main/feature.html', course=course_name, section=section_name, assignments=course_assignments)
+    completed_course_assignments = completed_assignments_by_course.get(course_name, [])
+    return render_template('main/feature.html', course=course_name, section=section_name, assignments=course_assignments, completed_assignments=completed_course_assignments)
 
 @main_bp.route('/course/<course_name>/<section_name>/delete', methods=['POST'])
 def delete_course(course_name, section_name):
@@ -40,9 +42,20 @@ def delete_assignment(course_name, section_name, assignment_name):
     ]
 
     return redirect(url_for('.feature', course_name=course_name, section_name=section_name))
-    '''
-    course_data = assignments_by_course[course_name]
-    assignment_list = course_data[course_data.index(section_name)]
-    assignment_list.remove(assignment_name)
-    return redirect(url_for('.feature', course_name=course_name, section_name=section_name))
-    '''
+
+@main_bp.route('/assignment/<course_name>/<section_name>/<assignment_name>/submit', methods=['POST'])
+def submit_assignment(course_name, section_name, assignment_name):
+    assignments = assignments_by_course.get(course_name, [])
+    assignment = next(
+        (a for a in assignments if a["name"] == assignment_name and a["section"] == section_name),
+        None
+    )
+    if assignment is None:
+        flash ("Assignment not found", "error")
+        return redirect(url_for('main.feature', course_name=course_name, section_name=section_name))
+
+    assignments.remove(assignment)
+    completed_assignments_by_course.setdefault(course_name, []).append(assignment)
+
+    flash(f"'{assignment_name}' submitted", "success")
+    return redirect(url_for('main.feature', course_name=course_name, section_name=section_name))

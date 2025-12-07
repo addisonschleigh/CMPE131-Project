@@ -19,4 +19,16 @@
             </ul>
         {% endfor %}
     {% endif %}
+    <h3>Completed Assignments</h3>
+    {% if completed_assignments %}
+    <ul>
+    {% for a in completed_assignments %}
+        {% if a.section == section %}
+            <li>{{ a.name }} — {{ a.points }} pts</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>Completed Assignments appear here</p>
+    {% endif %}
 {% endblock %}

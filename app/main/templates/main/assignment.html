@@ -10,4 +10,11 @@
 
     <h1 class="assignment">Assignment: {{ assignment }} </h1>
     <p class="assignment">Points: {{ points }} </p>
+    <form method="POST"
+      action="{{ url_for('main.submit_assignment',
+                         course_name=course,
+                         section_name=section,
+                         assignment_name=assignment) }}">
+    <button type="submit" class="submit-btn">Submit</button>
+    </form>
 {% endblock %}
