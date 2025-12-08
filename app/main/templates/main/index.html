@@ -5,7 +5,7 @@
     {% if courses %}
         <div class="classes">
     {% for key,value in courses.items() %}
-            <a href="{{ url_for('main.feature', course_name=key, section_name=value) }}"><div class="class"> {{ key }}, Section {{ value }}</div></a>
+            <a href="{{ url_for('main.feature', course_name=key, section_name=value, role=role) }}"><div class="class"> {{ key }}, Section {{ value }}</div></a>
     {% endfor %}
         </div>
     {% else %}

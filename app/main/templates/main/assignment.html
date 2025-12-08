@@ -4,6 +4,7 @@
     <h1 class="course">{{course}}, Section {{ section }}</h1>
     <form method="post" action="{{ url_for('main.delete_assignment', course_name=course, section_name=section, assignment_name=assignment) }}"
         onsubmit="return confirm('Really delete assignment? This cannot be undone.');">
+        <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
         <button type="submit" class="btn btn-danger">Delete Assignment</button>
     </form>
     <br>
@@ -15,6 +16,7 @@
                          course_name=course,
                          section_name=section,
                          assignment_name=assignment) }}">
+    <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
     <button type="submit" class="submit-btn">Submit</button>
     </form>
 {% endblock %}

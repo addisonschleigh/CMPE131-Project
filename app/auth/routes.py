@@ -1,7 +1,5 @@
 from . import auth_bp
-from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
-from ..forms import LoginForm
 from ..forms import RegisterForm
 from ..models import User
 from .. import db
@@ -18,8 +16,10 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
+            role = form.role.data
+            print(role)
             flash('You have been logged in successfully.', category= 'success')
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.index', role=role))
         else:
             flash('Login unsuccessful. Please check username and password.', category='error')
 
@@ -67,18 +67,24 @@ def register():
     return render_template("auth/register.html", form=form)
 
 @auth_bp.route("/course_add", methods=["GET", "POST"])
+@login_required
 def course_add():
     form = CourseForm()
+    role = request.args.get('role')
     if form.validate_on_submit():
         course_name = form.name.data
         course_section = form.section.data
         courses[course_name] = course_section
-        return redirect('/')
-    return render_template('auth/course_add.html', form=form)
+
+        role_from_form = request.form.get('role')
+        return redirect(url_for('main.index', role=role_from_form))
+    return render_template('auth/course_add.html', form=form, role=role)
 
 @auth_bp.route("/course/<course_name>/<section_name>/assignment_add", methods=["GET", "POST"])
+@login_required
 def assignment_add(course_name, section_name):
     form = AssignmentForm()
+    role = request.args.get('role')
     if form.validate_on_submit():
         assignment_name = form.name.data
         assignment_points = form.points.data
@@ -88,6 +94,7 @@ def assignment_add(course_name, section_name):
             'points': assignment_points,
             'section': section_name
         })
-        return redirect(url_for('main.feature', course_name=course_name, section_name=section_name))
+        role_from_form = request.form.get('role')
+        return redirect(url_for('main.feature', course_name=course_name, section_name=section_name, role=role_from_form))
 
-    return render_template('auth/assignment_add.html', form=form, course=course_name, section=section_name)
+    return render_template('auth/assignment_add.html', form=form, course=course_name, section=section_name, role=role)

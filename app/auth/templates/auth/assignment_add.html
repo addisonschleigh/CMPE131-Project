@@ -5,6 +5,9 @@
     <div class="assignment-add">
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
+
+        <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
+
         <p class="assignment-add">
             {{ form.name.label }} <br>
             {{ form.name(size=32) }}
