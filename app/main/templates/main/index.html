@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome to LearnQuest!</h1>
-    <ul>
-        <li>Course 1</li>
-        <li>Course 2</li>
-         <li>Course 3</li>
-    </ul>
+    <h1 class="dashboard">Welcome to LearnQuest!</h1>
+    {% if courses %}
+        <div class="classes">
+    {% for key,value in courses.items() %}
+            <a href="{{ url_for('main.feature', course_name=key, section_name=value) }}"><div class="class"> {{ key }}, Section {{ value }}</div></a>
+    {% endfor %}
+        </div>
+    {% else %}
+        <h2>Please Create Course to view Courses</h2>
+    {% endif %}
 {% endblock %}

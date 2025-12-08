@@ -1,0 +1,127 @@
+.navbar {
+    width: 100%;
+    padding: 12px 20px;
+    background: #283593;      /* deep indigo */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+}
+
+.nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #e8eaf6;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+/* Hover effect */
+.nav a:hover {
+    color: #bbdefb;
+    text-decoration: underline;
+}
+
+.login, .class-add, .assignment-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Login card */
+.login-container,
+.course-container,
+.assignment-container {
+    width: 380px;
+    padding: 25px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings like "Sign in" */
+h1.login, h1.class-add, h1.assignment-add {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Form spacing */
+p.login, p.class-add, h1.assignment-add {
+    width: 100%;
+    margin-bottom: 18px;
+    color: #333;
+    font-size: 15px;
+}
+
+/* Inputs from WTForms */
+.login, .class-add, .assignment-add input[type="text"],
+.login, .class-add, .assignment-add input[type="password"],
+.login, .class-add, .assignment-add input[type="number"],
+.login, .class-add, .assignment-add input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+.login input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.class-add input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.assignment-add input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login .class-add, .assignment-add input[type="submit"]:hover {
+    background: #0069d9;
+}
+
+.classes{
+    list-style-type: none; /* Removes bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+div.class{
+    flex: 1;
+    margin: 5px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    text-align: center
+}

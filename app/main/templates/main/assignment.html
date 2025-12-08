@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="course">{{course}}, Section {{ section }}</h1>
+    <form method="post" action="{{ url_for('main.delete_assignment', course_name=course, section_name=section, assignment_name=assignment) }}"
+        onsubmit="return confirm('Really delete assignment? This cannot be undone.');">
+        <button type="submit" class="btn btn-danger">Delete Assignment</button>
+    </form>
+    <br>
+
+    <h1 class="assignment">Assignment: {{ assignment }} </h1>
+    <p class="assignment">Points: {{ points }} </p>
+    <form method="POST"
+      action="{{ url_for('main.submit_assignment',
+                         course_name=course,
+                         section_name=section,
+                         assignment_name=assignment) }}">
+    <button type="submit" class="submit-btn">Submit</button>
+    </form>
+{% endblock %}

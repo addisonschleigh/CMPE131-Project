@@ -1,13 +1,16 @@
 <html>
     <head>
         <title>LearnQuest</title>
-        <link rel="stylesheet" href="../static/styles.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/feature">Feature</a>
+        <nav class="navbar">
+            <div class="nav">
+            <a href="{{ url_for('main.index') }}">Home</a>
+<!--            <a href="/feature">Feature</a> -->
             <a href="/auth/login">Login</a>
+            <a href="/auth/course_add">Course Add</a>
+            </div>
           </nav>
         <hr>
         {% with messages = get_flashed_messages() %}

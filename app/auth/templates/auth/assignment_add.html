@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="assignment-add">Create/Edit Assignment for {{ course }}, Section {{ section }}</h1>
+    <div class="assignment-add">
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p class="assignment-add">
+            {{ form.name.label }} <br>
+            {{ form.name(size=32) }}
+
+        </p>
+
+         <p class="assignment-add"> {{form.points.label}} <br>
+            {{form.points(size=32)}}</p>
+
+    <p class="assignment-add" class="btn-primary">{{form.submit()}}</p>
+    </form>
+    </div>
+{% endblock %}
