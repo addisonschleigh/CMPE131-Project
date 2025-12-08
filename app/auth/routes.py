@@ -19,13 +19,13 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('You have been logged in successfully.', category= 'success')
-            return redirect(url_for('main.hello'))
+            return redirect(url_for('main.index'))
         else:
             flash('Login unsuccessful. Please check username and password.', category='error')
 
     # Now check if the user is authenticated after the form submission
     if current_user.is_authenticated:
-        return redirect(url_for('main.hello'))
+        return redirect(url_for('main.index'))
 
     return render_template('auth/login.html', form=form)
 
@@ -34,7 +34,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.', category='success')
-    return redirect(url_for('main.hello'))
+    return redirect(url_for('main.index'))
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
