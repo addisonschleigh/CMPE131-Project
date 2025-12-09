@@ -1,13 +1,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="dashboard">Welcome to LearnQuest!</h1>
+    <h1 class="dashboard">Dashboard</h1>
     {% if courses %}
         <div class="classes">
     {% for key,value in courses.items() %}
             <a href="{{ url_for('main.feature', course_name=key, section_name=value, role=role) }}"><div class="class"> {{ key }}, Section {{ value }}</div></a>
     {% endfor %}
         </div>
+    <!-- ===== PENDING ASSIGNMENTS ===== -->
+<h2>Current Assignments</h2>
+
+{% if pending %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course</th><th>Section</th><th>Name</th><th>Points</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in pending %}
+        <tr class="pending">
+            <td>{{ a.course }}</td>
+            <td>{{ a.section }}</td>
+            <td>{{ a.name }}</td>
+            <td>{{ a.points }}</td>
+            <td>
+                <a href="{{ url_for('main.assignment',
+                                    course_name=a.course,
+                                    section_name=a.section,
+                                    assignment_name=a.name,
+                                    assignment_points=a.points,
+                                    role=role) }}"
+                class="btn-link btn-view">
+                    View
+                </a>
+
+                {% if role=="student" %}
+                <form method="post" style="display:inline;"
+                      action="{{ url_for('main.submit_assignment',
+                                         course_name=a.course,
+                                         section_name=a.section,
+                                         assignment_name=a.name) }}">
+                    <input type="hidden" name="role" value="{{ role }}">
+                    <button type="submit" class="table-btn btn-submit">Submit</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No unsubmitted assignments.</p>
+{% endif %}
+    <!-- ===== SUBMITTED ASSIGNMENTS ===== -->
+<h2>Submitted Assignments</h2>
+
+{% if submitted %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course</th><th>Section</th><th>Name</th><th>Points</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in submitted %}
+        <tr class="submitted">
+            <td>{{ a.course }}</td>
+            <td>{{ a.section }}</td>
+            <td>{{ a.name }}</td>
+            <td>{{ a.points }}</td>
+            {% if role=="instructor" %}
+            <td>Grade</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No submitted assignments.</p>
+{% endif %}
     {% else %}
         <h2>Please Create Course to view Courses</h2>
     {% endif %}

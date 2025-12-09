@@ -125,3 +125,96 @@ div.class{
     background-color: #f9f9f9;
     text-align: center
 }
+
+/* General table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: black;
+}
+
+/* Header row */
+.table thead tr {
+    background-color: #222;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table cells */
+.table th,
+.table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #444;
+}
+
+/* Alternate rows */
+.table tbody tr:nth-child(even) {
+    background-color: #2a2a2a;
+    color: white
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    color: white;
+    background-color: #333;
+    cursor: pointer;
+}
+
+/* Base button-like link */
+.btn-link {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s ease-in-out;
+}
+
+/* View button style */
+.btn-view {
+    background: #444;
+    color: #eee;
+}
+
+.btn-view:hover {
+    background: #555;
+    color: white;
+}
+
+/* Base button styling */
+.table-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+/* Submit button */
+.btn-submit {
+    background: #2b7cff;
+    color: white;
+}
+
+.btn-submit:hover {
+    background: #1e5fcc;
+}
+
+/* Small inline form fix (keeps table layout clean) */
+.table-btn-form {
+    display: inline;
+}
+
+/* Pending row accent */
+.pending {
+    border-left: 6px solid #cc4444;
+}
+
+/* Submitted row accent */
+.submitted {
+    border-left: 6px solid #44cc66;
+}
