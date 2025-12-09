@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+
+{% if courses %}
+<h3>Courses</h3>
+<ul>
+  {% for course in courses %}
+  <li>
+   <a href="{{ url_for('main.feature', course_name=course.name, section_name=course.section, role=role) }}">
+     {{ assignment.name }} ({{ assignment.course }} - Section {{ assignment.section }})
+   </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if not courses and not assignments %}
+<p>No courses and assignments found</p>
+{% endif %}
+
+<a href="{{ url_for('main.index', role=role) }}">Home</a>
+{% endblock %}
