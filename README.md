@@ -31,6 +31,7 @@ In order to set up and run this program:
 ## PyTest Instructions
 Simply need to put pytest in the terminal or run them individually in their respective files.
 
+## Milestone 1 Screenshots
 ## Screenshot of rendered page (This is after Login POST):
 <img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
 
@@ -48,6 +49,23 @@ Simply need to put pytest in the terminal or run them individually in their resp
 
 - Used Visily AI for the UI sketches but I drew them by hand first
 - [(https://www.visily.ai/)]
+
+## Milestone 2 Screenshots
+
+## Screenshot of initial dashboard page
+<img width="1741" height="872" alt="Screenshot 2025-12-08 at 10 15 02 PM" src="https://github.com/user-attachments/assets/5f3dd7b9-7795-43f2-ab7d-b4a13e668591" />
+
+## Screenshot of login page
+<img width="1728" height="681" alt="Screenshot 2025-12-08 at 10 15 38 PM" src="https://github.com/user-attachments/assets/1f0befdd-ee7d-4f3c-84a3-8ccf38d9d4e9" />
+
+## Screenshot of dashboard with courses
+<img width="1747" height="879" alt="Screenshot 2025-12-08 at 10 17 25 PM" src="https://github.com/user-attachments/assets/4f2bddf2-d40c-40f4-bba9-95caba2faa52" />
+
+## Screenshot of course page
+<img width="1730" height="871" alt="Screenshot 2025-12-08 at 10 18 20 PM" src="https://github.com/user-attachments/assets/357ae8e9-c762-458b-af4e-54783754312c" />
+
+## Screenshot of dashbaord with completed assignments
+<img width="1733" height="871" alt="Screenshot 2025-12-08 at 10 21 25 PM" src="https://github.com/user-attachments/assets/cf2283bb-1c1a-4c4a-8989-33e6b9408548" />
 
 ## Meet Our Team
 - **Project Manager/UI Developer**: Abdullah Ahmed
