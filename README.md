@@ -17,10 +17,22 @@ In order to set up and run this program:
 3. Make sure all extensions needed, as seen in requirements.txt, are installed
 4. Run program in the repository typing python run.py (or python3 run.py) into the terminal
 
+## Test Instructions
+1. First, be sure to register (login page)
+2. Log in, choose a role (ideal to start with instructor role)
+3. Create course(s). These course(s) can also be deleted
+4. Go to course(s)
+5. Add assignments to course(s). These assignments can also be deleted
+6. Back at the dashboard, assignments should be seen
+7. Logout, then log back in as a student
+8. You should see the assignments and be able to submit them
+9. Submitted assignments should be seen on the dashboard and course page
+
+## PyTest Instructions
+Simply need to put pytest in the terminal or run them individually in their respective files.
+
 ## Screenshot of rendered page (This is after Login POST):
 <img width="1917" height="894" alt="Screenshot 2025-11-16 at 5 29 01 PM" src="https://github.com/user-attachments/assets/f409b36d-79a0-44f8-a952-d1fd45f4e571" />
-
-
 
 ## Home Screen UI Sketch
 <img width="1488" height="988" alt="LearnQuest - Homepage" src="https://github.com/user-attachments/assets/c168b119-34a4-4a5f-b6bc-e460abbc4112" />
