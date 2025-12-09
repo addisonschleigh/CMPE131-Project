@@ -156,3 +156,37 @@ def submit_assignment(course_name, section_name, assignment_name):
 
     flash(f"Submitted '{assignment_name}'.", "success")
     return redirect(url_for('main.feature', course_name=course_name, section_name=section_name, role=role))
+
+@main_bp.route('/search')
+def search():
+    query = request.args.get('query') or request.args.get('search') or ""
+    query = query.lower()
+    course_results = []
+    assignment_results = []
+
+    # Search courses
+    for course_name, section_name in courses.items():
+        if query in course_name.lower() or query in section_name.lower():
+            course_results.append({
+                'course_name': course_name,
+                'section_name': section_name
+            })
+
+    # Search assignments
+    for course_name, assignment_list in assignments_by_course.items():
+        for assignment in assignment_list:
+            if query in assignment["name"].lower():
+                assignment_results.append({
+                    'course_name': course_name,
+                    'section_name': assignment["section"],
+                    'assignment_name': assignment["name"],
+                    'points': assignment["points"]
+                })
+
+    return render_template(
+        'main/search.html',
+        query=query,
+        course_results=course_results,
+        assignment_results=assignment_results,
+        role=role
+    )

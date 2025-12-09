@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="dashboard">Dashboard</h1>
+    <h1 class="dashboard">Welcome to LearnQuest!</h1>
+
+        <!-- Search Bar -->
+        <form action="{{ url_for('main.search') }}" method="get" class="search-form">
+            <input type="text" name="search" placeholder="Search courses and assignments here" required>
+            <button type="submit">Search</button>
+        </form>
     {% if courses %}
         <div class="classes">
     {% for key,value in courses.items() %}
