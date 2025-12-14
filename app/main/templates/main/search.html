@@ -7,9 +7,22 @@
 <ul>
   {% for course in courses %}
   <li>
-   <a href="{{ url_for('main.feature', course_name=course.name, section_name=course.section, role=role) }}">
-     {{ assignment.name }} ({{ assignment.course }} - Section {{ assignment.section }})
+   <a href="{{ url_for('main.feature', course_name=course.course_name, section_name=course.section_name, role=role) }}">
+     {{ course.course_name }} - Section {{ course.section_name }}
    </a>
+      {% if assignments %}
+      <h2>Assignments in {{course_name}}</h2>
+   <ul>
+       {% for assignment in assignments %}
+       <li>
+           <a href="{{ url_for('main.assignment', course_name=course_name, section_name=section_name,
+                    assignment_name=assignment.name, assignment_points=assignment.points, role=role)}}">
+               {{ assignment.name }} = Worth {{assignment.points}} points
+           </a>
+       </li>
+       {% endfor %}
+   </ul>
+      {% endif %}
   </li>
   {% endfor %}
 </ul>

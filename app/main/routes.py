@@ -12,6 +12,8 @@ courses = {}
 assignments_by_course = {}
 completed_assignments_by_course = {}
 role =""
+#enrolled_courses = []
+#instructor_courses = []
 
 @main_bp.route('/')
 # view functions
@@ -75,11 +77,24 @@ def index():
             if key not in submitted_keys:
                 submitted.append({'course': course, 'section': section, 'name': name, 'points': points})
 
-    return render_template(
-        'main/index.html',
-        courses=courses, pending=pending,
-        submitted=submitted,
-        role=role)
+    return render_template('main/index.html',
+                           courses=courses,
+                           submitted=submitted,
+                           pending=pending, role=role)
+
+    if (role=="student"):
+        return render_template(
+            'main/index.html',
+            courses=enrolled_courses, pending=pending,
+            submitted=submitted,
+            role=role)
+    else:
+        return render_template(
+            'main/index.html',
+            courses=instructor_courses, pending=pending,
+            submitted=submitted,
+            role=role
+        )
 
 @main_bp.route('/course/<course_name>/<section_name>')
 def feature(course_name, section_name):
@@ -94,7 +109,9 @@ def feature(course_name, section_name):
 def delete_course(course_name, section_name):
     role = request.form.get('role') or request.args.get('role')
     del courses[course_name]
-    print(role)
+    course = Course.query.filter_by(name=course_name, section=section_name).first()
+    db.session.delete(course)
+    db.session.commit()
     return redirect(url_for('.index', role=role))
 
 @main_bp.route('/assignment/<course_name>/<section_name>/<assignment_name>')
@@ -182,11 +199,12 @@ def search():
                     'assignment_name': assignment["name"],
                     'points': assignment["points"]
                 })
+                print(assignment_results)
 
     return render_template(
         'main/search.html',
         query=query,
-        course_results=course_results,
-        assignment_results=assignment_results,
+        courses=course_results,
+        assignments=assignment_results,
         role=role
     )

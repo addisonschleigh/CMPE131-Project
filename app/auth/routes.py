@@ -1,7 +1,7 @@
 from . import auth_bp
 from flask_login import login_user, logout_user, login_required, current_user
 from ..forms import RegisterForm
-from ..models import User
+from ..models import User, Course, Assignment
 from .. import db
 from flask import render_template, flash, redirect, url_for, request
 from ..forms import LoginForm, CourseForm, AssignmentForm
@@ -17,7 +17,6 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             role = form.role.data
-            print(role)
             flash('You have been logged in successfully.', category= 'success')
             return redirect(url_for('main.index', role=role))
         else:
@@ -72,13 +71,36 @@ def course_add():
     form = CourseForm()
     role = request.args.get('role')
     if form.validate_on_submit():
-        course_name = form.name.data
-        course_section = form.section.data
-        courses[course_name] = course_section
+        course = Course(
+            name=form.name.data,
+            section=form.section.data
+        )
+        db.session.add(course)
+        db.session.commit()
 
+        flash('Course added successfully.', category='success')
         role_from_form = request.form.get('role')
         return redirect(url_for('main.index', role=role_from_form))
+
     return render_template('auth/course_add.html', form=form, role=role)
+
+@auth_bp.route("/course_enroll", methods=["GET", "POST"])
+@login_required
+def course_enroll():
+    form = CourseForm()
+    role = request.args.get('role')
+    if form.validate_on_submit():
+        course = Course.query.filter_by(name=form.name.data).first()
+        if course and course.section==form.section.data:
+            course_name=course.name
+            course_section=course.section
+            courses[course_name] = course_section
+            flash('Course enrolled successfully.', category='success')
+            return redirect(url_for('main.index', role=role, courses=courses))
+        else:
+            flash('Course not enrolled successfully.', category='error')
+
+    return render_template('auth/course_enroll.html', form=form, role=role)
 
 @auth_bp.route("/course/<course_name>/<section_name>/assignment_add", methods=["GET", "POST"])
 @login_required

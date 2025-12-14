@@ -8,21 +8,24 @@
             <div class="nav">
             <a href="{{ url_for('main.index', role=role) }}">Home</a>
 <!--            <a href="/feature">Feature</a> -->
-            <a href="/auth/login">Login</a>
+            <a href="{{ url_for('auth.login', role=role)}}">Login</a>
             <a href="/auth/logout">Logout</a>
-            <a href="{{url_for('auth.course_add', role=role)}}">Course Add</a>
+                {% if role=="instructor" %}
+            <a href="{{ url_for('auth.course_add', role=role) }}">Course Add</a>
+                {% endif %}
+            <a href="{{ url_for('auth.course_enroll', role=role) }}">Course Enroll</a>
             </div>
           </nav>
         <hr>
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
+    {% if messages %}
         <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+                <li>{{ message }}</li>
             {% endfor %}
         </ul>
-        {% endif %}
-        {% endwith %}
+    {% endif %}
+{% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>

@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
 class CourseForm(FlaskForm):
     name = StringField('Course Name', validators=[DataRequired()])
     section = StringField('Section', validators=[DataRequired()])
-    submit = SubmitField('Create Course')
+    submit = SubmitField('Add Course')
 
 class AssignmentForm(FlaskForm):
     name = StringField('Assignment Name', validators=[DataRequired()])
