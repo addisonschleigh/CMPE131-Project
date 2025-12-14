@@ -148,7 +148,8 @@ def assignment_add(course_name, section_name):
     assignments_by_course.setdefault(course_name, []).append({
         'name': assignment_name,
         'points': assignment_points,
-        'section': section_name
+        'section': section_name,
+        'grade': ""
     })
 
     # preserve role on redirect (read from POST hidden input or querystring)

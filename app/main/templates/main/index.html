@@ -4,10 +4,11 @@
     <h1 class="dashboard">Welcome to LearnQuest!</h1>
 
         <!-- Search Bar -->
-        <form action="{{ url_for('main.search') }}" method="get" class="search-form">
-            <input type="text" name="search" placeholder="Search courses and assignments here" required>
-            <button type="submit">Search</button>
-        </form>
+        <form action="{{ url_for('main.search') }}" method="get">
+    <input type="hidden" name="role" value="{{ role }}">
+    <input type="text" name="search" placeholder="Search courses and assignments here" required>
+    <button type="submit">Search</button>
+    </form>
     {% if courses %}
         <div class="classes">
     {% for key,value in courses.items() %}
@@ -67,7 +68,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Course</th><th>Section</th><th>Name</th><th>Points</th><th>Actions</th>
+            <th>Course</th><th>Section</th><th>Name</th><th>Points</th><th>Actions</th><th>Grade</th>
         </tr>
     </thead>
     <tbody>
@@ -77,9 +78,31 @@
             <td>{{ a.section }}</td>
             <td>{{ a.name }}</td>
             <td>{{ a.points }}</td>
-            {% if role=="instructor" %}
-            <td>Grade</td>
+            <td>
+                {% if role=="instructor" %}
+                <form method="POST"
+      action="{{ url_for('main.grade_assignment',
+                         course=a.course,
+                         section=a.section,
+                         assignment=a.name, role=role) }}">
+      <input type="number"
+             name="grade"
+             min="0"
+             max="{{ a.points }}"
+             >
+      <button type="submit">Grade</button>
+    </form>
+            {% else %}
+                -
             {% endif %}
+            </td>
+            <td>
+                {% if a.grade is not none and a.grade != '' %}
+                    {{ a.grade }}
+                {% else %}
+                 -
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

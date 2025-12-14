@@ -31,6 +31,19 @@
     {% for a in completed_assignments %}
         {% if a.section == section %}
             <li>{{ a.name }} — {{ a.points }} pts</li>
+             {% if role=="instructor" %}
+                <form method="POST"
+      action="{{ url_for('main.grade_assignment',
+                         course=course,
+                         section=a.section,
+                         assignment=a.name, role=role) }}">
+      <input type="number"
+             name="grade"
+             min="0"
+             max="{{ a.points }}">
+      <button type="submit">Grade</button>
+    </form>
+            {% endif %}
         {% endif %}
     {% endfor %}
     </ul>

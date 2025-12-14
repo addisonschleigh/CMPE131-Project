@@ -1,5 +1,5 @@
 from . import main_bp
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, abort
 from flask_login import login_required, current_user
 from ..forms import LoginForm
 from app import db
@@ -50,8 +50,14 @@ def index():
                 section = ''
                 points = None
 
+            grade = None
+            for ca in completed_assignments_by_course.get(course, []):
+                if ca.get('name') == name and str(ca.get('section')) == section:
+                    grade = ca.get('grade')
+                    break
+
             key = (course, section, name)
-            row = {'course': course, 'section': section, 'name': name, 'points': points}
+            row = {'course': course, 'section': section, 'name': name, 'points': points, 'grade': grade}
 
             if key in completed_index:
                 submitted.append(row)
@@ -75,7 +81,7 @@ def index():
 
             key = (course, section, name)
             if key not in submitted_keys:
-                submitted.append({'course': course, 'section': section, 'name': name, 'points': points})
+                submitted.append({'course': course, 'section': section, 'name': name, 'points': points, 'grade': ca.get('grade')})
 
     return render_template('main/index.html',
                            courses=courses,
@@ -118,7 +124,6 @@ def delete_course(course_name, section_name):
 def assignment(course_name, section_name, assignment_name):
     assignment_points = request.args.get('assignment_points', type=int)
     role = request.form.get('role') or request.args.get('role')
-    print(role)
     return render_template('main/assignment.html', course=course_name, section=section_name, assignment=assignment_name, points=assignment_points, role=role)
 
 @main_bp.route('/assignment/<course_name>/<section_name>/<assignment_name>/delete', methods=['POST'])
@@ -130,7 +135,6 @@ def delete_assignment(course_name, section_name, assignment_name):
     assignments_by_course[course_name] = [
         a for a in assignment_list if a["name"] != assignment_name
     ]
-    print(role)
     return redirect(url_for('.feature', course_name=course_name, section_name=section_name, role=role))
 
 @main_bp.route('/assignment/<course_name>/<section_name>/<assignment_name>/submit', methods=['POST'])
@@ -166,7 +170,8 @@ def submit_assignment(course_name, section_name, assignment_name):
     completed_item = {
         'name': item.get('name'),
         'points': item.get('points'),
-        'section': str(item.get('section', section_name))
+        'section': str(item.get('section', section_name)),
+        'grade': ''
     }
 
     completed_assignments_by_course.setdefault(course_name, []).append(completed_item)
@@ -176,6 +181,8 @@ def submit_assignment(course_name, section_name, assignment_name):
 
 @main_bp.route('/search')
 def search():
+    role = request.args.get('role')
+    print(role)
     query = request.args.get('query') or request.args.get('search') or ""
     query = query.lower()
     course_results = []
@@ -208,3 +215,20 @@ def search():
         assignments=assignment_results,
         role=role
     )
+
+@main_bp.route("/course/<course>/<section>/<assignment>/grade",
+               methods=["POST"])
+@login_required
+def grade_assignment(course, section, assignment):
+    role = request.args.get('role')
+    if role != "instructor":
+        abort(403)
+
+    grade = int(request.form["grade"])
+
+    for a in completed_assignments_by_course.get(course, []):
+        if a["name"] == assignment and a["section"] == section:
+            a["grade"] = grade
+            break
+
+    return redirect(request.referrer)

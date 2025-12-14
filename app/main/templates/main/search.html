@@ -11,13 +11,17 @@
      {{ course.course_name }} - Section {{ course.section_name }}
    </a>
       {% if assignments %}
-      <h2>Assignments in {{course_name}}</h2>
+      <h2><h2>Assignments</h2></h2>
    <ul>
        {% for assignment in assignments %}
        <li>
-           <a href="{{ url_for('main.assignment', course_name=course_name, section_name=section_name,
-                    assignment_name=assignment.name, assignment_points=assignment.points, role=role)}}">
-               {{ assignment.name }} = Worth {{assignment.points}} points
+           <a href="{{ url_for('main.assignment',
+    course_name=assignment.course_name,
+    section_name=assignment.section_name,
+    assignment_name=assignment.assignment_name,
+    assignment_points=assignment.points,
+    role=role) }}">
+               {{ assignment.assignment_name }} = Worth {{ assignment.points }} points
            </a>
        </li>
        {% endfor %}
