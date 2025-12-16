@@ -4,11 +4,21 @@
     <h1 class="dashboard">Welcome to LearnQuest!</h1>
 
         <!-- Search Bar -->
-        <form action="{{ url_for('main.search') }}" method="get">
+        <form class="search-bar" action="{{ url_for('main.search') }}" method="get">
     <input type="hidden" name="role" value="{{ role }}">
-    <input type="text" name="search" placeholder="Search courses and assignments here" required>
-    <button type="submit">Search</button>
-    </form>
+
+    <input
+        class="search-input"
+        type="text"
+        name="search"
+        placeholder="Search courses and assignments…"
+        required
+    >
+
+    <button class="search-btn" type="submit">
+        Search
+    </button>
+</form>
     {% if courses %}
         <div class="classes">
     {% for key,value in courses.items() %}
@@ -80,18 +90,25 @@
             <td>{{ a.points }}</td>
             <td>
                 {% if role=="instructor" %}
-                <form method="POST"
+                <form class="grade-inline"
+      method="POST"
       action="{{ url_for('main.grade_assignment',
                          course=a.course,
                          section=a.section,
-                         assignment=a.name, role=role) }}">
-      <input type="number"
-             name="grade"
-             min="0"
-             max="{{ a.points }}"
-             >
-      <button type="submit">Grade</button>
-    </form>
+                         assignment=a.name,
+                         role=role) }}">
+
+    <input class="grade-input"
+           type="number"
+           name="grade"
+           min="0"
+           max="{{ a.points }}"
+           placeholder="Grade">
+
+    <button class="grade-btn" type="submit">
+        Save
+    </button>
+</form>
             {% else %}
                 -
             {% endif %}

@@ -1,53 +1,98 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="course">{{course}}, Section {{ section }}</h1>
-    {% if role=="instructor" %}
-    <form method="post" action="{{ url_for('main.delete_course', course_name=course, section_name=section) }}"
-        onsubmit="return confirm('Really delete course? This cannot be undone.');">
-        <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
-        <button type="submit" class="btn btn-danger">Delete Course</button>
-    </form>
-    <br>
-    <a href="{{url_for('auth.assignment_add',
-                    course_name=course,
-                    section_name=section,
-                    role=role)}}">Add Assignment</a>
-    {% endif %}
-    {% if assignments %}
-        <p>To Do</p>
-        {% for assignment in assignments %}
-            <ul>
-                <li class="course">
-                    <a href="{{ url_for('main.assignment', course_name=course, section_name=section,
-                    assignment_name=assignment.name, assignment_points=assignment.points, role=role) }}">
-                        {{ assignment.name }}, Worth {{ assignment.points }} points</a></li>
-            </ul>
-        {% endfor %}
-    {% endif %}
-    <h3>Completed Assignments</h3>
-    {% if completed_assignments %}
-    <ul>
-    {% for a in completed_assignments %}
-        {% if a.section == section %}
-            <li>{{ a.name }} — {{ a.points }} pts</li>
-             {% if role=="instructor" %}
-                <form method="POST"
-      action="{{ url_for('main.grade_assignment',
-                         course=course,
-                         section=a.section,
-                         assignment=a.name, role=role) }}">
-      <input type="number"
-             name="grade"
-             min="0"
-             max="{{ a.points }}">
-      <button type="submit">Grade</button>
-    </form>
-            {% endif %}
+<div class="course-page">
+
+    <!-- Header -->
+    <div class="course-header">
+        <h1>{{ course }} <span>Section {{ section }}</span></h1>
+
+        {% if role == "instructor" %}
+        <div class="course-actions">
+            <form method="post"
+                  action="{{ url_for('main.delete_course', course_name=course, section_name=section) }}"
+                  onsubmit="return confirm('Really delete course? This cannot be undone.');">
+                <input type="hidden" name="role" value="{{ role }}">
+                <button type="submit" class="btn danger">Delete Course</button>
+            </form>
+
+            <a class="btn primary"
+               href="{{ url_for('auth.assignment_add',
+                                course_name=course,
+                                section_name=section,
+                                role=role) }}">
+                + Add Assignment
+            </a>
+        </div>
         {% endif %}
-    {% endfor %}
-    </ul>
-    {% else %}
-        <p>Completed Assignments appear here</p>
-    {% endif %}
+    </div>
+
+    <!-- Active Assignments -->
+    <div class="card">
+        <h2>To Do</h2>
+
+        {% if assignments %}
+            <ul class="assignment-list">
+                {% for assignment in assignments %}
+                <li class="assignment-item">
+                    <a href="{{ url_for('main.assignment',
+                        course_name=course,
+                        section_name=section,
+                        assignment_name=assignment.name,
+                        assignment_points=assignment.points,
+                        role=role) }}">
+                        <strong>{{ assignment.name }}</strong>
+                        <span>{{ assignment.points }} pts</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="muted">No active assignments</p>
+        {% endif %}
+    </div>
+
+    <!-- Completed Assignments -->
+    <div class="card">
+        <h2>Completed Assignments</h2>
+
+        {% if completed_assignments %}
+            <ul class="assignment-list">
+                {% for a in completed_assignments %}
+                {% if a.section == section %}
+                <li class="assignment-item completed">
+                    <div>
+                        <strong>{{ a.name }}</strong>
+                        <span>{{ a.points }} pts</span>
+                        {% if a.grade != "" %}
+                            <span class="grade">Grade: {{ a.grade }}</span>
+                        {% endif %}
+                    </div>
+
+                    {% if role == "instructor" %}
+                    <form method="POST"
+                          class="grade-form"
+                          action="{{ url_for('main.grade_assignment',
+                                             course=course,
+                                             section=a.section,
+                                             assignment=a.name,
+                                             role=role) }}">
+                        <input type="number"
+                               name="grade"
+                               min="0"
+                               max="{{ a.points }}"
+                               placeholder="Grade">
+                        <button type="submit" class="btn small">Save</button>
+                    </form>
+                    {% endif %}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="muted">Completed assignments appear here</p>
+        {% endif %}
+    </div>
+
+</div>
 {% endblock %}

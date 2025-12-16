@@ -1,40 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Search Results for "{{ query }}"</h2>
+<div class="search-results">
+<h2 class="results-title">Search Results for "{{ query }}"</h2>
 
 {% if courses %}
-<h3>Courses</h3>
-<ul>
-  {% for course in courses %}
-  <li>
-   <a href="{{ url_for('main.feature', course_name=course.course_name, section_name=course.section_name, role=role) }}">
-     {{ course.course_name }} - Section {{ course.section_name }}
-   </a>
-      {% if assignments %}
-      <h2><h2>Assignments</h2></h2>
-   <ul>
-       {% for assignment in assignments %}
-       <li>
-           <a href="{{ url_for('main.assignment',
-    course_name=assignment.course_name,
-    section_name=assignment.section_name,
-    assignment_name=assignment.assignment_name,
-    assignment_points=assignment.points,
-    role=role) }}">
-               {{ assignment.assignment_name }} = Worth {{ assignment.points }} points
-           </a>
-       </li>
-       {% endfor %}
-   </ul>
-      {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-{% endif %}
+    <section class="results-section">
+        <h3>Courses</h3>
+        <ul class="results-list">
+            {% for course in courses %}
+            <li class="result-card">
+                <a
+                    href="{{ url_for('main.feature',
+                        course_name=course.course_name,
+                        section_name=course.section_name,
+                        role=role) }}"
+                    class="result-link"
+                >
+                    <span class="result-name">{{ course.course_name }}</span>
+                    <span class="result-meta">Section {{ course.section_name }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
 
-{% if not courses and not assignments %}
-<p>No courses and assignments found</p>
-{% endif %}
+    {% if assignments %}
+    <section class="results-section">
+        <h3>Assignments</h3>
+        <ul class="results-list">
+            {% for assignment in assignments %}
+            <li class="result-card">
+                <a
+                    href="{{ url_for('main.assignment',
+                        course_name=assignment.course_name,
+                        section_name=assignment.section_name,
+                        assignment_name=assignment.assignment_name,
+                        assignment_points=assignment.points,
+                        role=role) }}"
+                    class="result-link"
+                >
+                    <span class="result-name">{{ assignment.assignment_name }}</span>
+                    <span class="result-meta">
+                        {{ assignment.course_name }} · Section {{ assignment.section_name }}
+                    </span>
+                    <span class="result-points">{{ assignment.points }} pts</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
 
-<a href="{{ url_for('main.index', role=role) }}">Home</a>
+    {% if not courses and not assignments %}
+        <p class="no-results">No courses or assignments found.</p>
+    {% endif %}
+
+    <a class="back-home" href="{{ url_for('main.index', role=role) }}">
+        ← Back to Home
+    </a>
+</div>
 {% endblock %}

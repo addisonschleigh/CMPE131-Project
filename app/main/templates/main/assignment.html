@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="course">{{course}}, Section {{ section }}</h1>
+<div class="assignment-page">
+    <h1 class="assignment-header">{{course}}, Section {{ section }}</h1>
     {% if role=="instructor" %}
+<div class="danger-zone">
     <form method="post" action="{{ url_for('main.delete_assignment', course_name=course, section_name=section, assignment_name=assignment) }}"
         onsubmit="return confirm('Really delete assignment? This cannot be undone.');">
         <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
         <button type="submit" class="btn btn-danger">Delete Assignment</button>
     </form>
+    </div>
     {% endif %}
     <br>
 
-    <h1 class="assignment">Assignment: {{ assignment }} </h1>
-    <p class="assignment">Points: {{ points }} </p>
+    <div class="assignment-card">
+    <h1 class="assignment-title">Assignment: {{ assignment }} </h1>
+    <p class="assignment-points">Points: {{ points }} </p>
         {% if role=="student" %}
     <form method="POST"
       action="{{ url_for('main.submit_assignment',
@@ -20,7 +24,9 @@
                          section_name=section,
                          assignment_name=assignment) }}">
     <input type="hidden" name="role" value="{{ role or request.args.get('role') }}">
-    <button type="submit" class="submit-btn">Submit</button>
+    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
     </form>
+        </div>
     {% endif %}
+   </div>
 {% endblock %}
