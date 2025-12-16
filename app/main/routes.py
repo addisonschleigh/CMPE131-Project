@@ -7,6 +7,8 @@ from flask import current_app as myapp_obj
 
 from ..models import Course, Assignment, Announcement
 from ..models import User
+from datetime import datetime
+import pytz
 
 courses = {}
 assignments_by_course = {}
@@ -111,6 +113,9 @@ def feature(course_name, section_name):
     course = Course.query.filter_by(name=course_name, section=section_name).first()
     course_announcements = Announcement.query.filter_by(course_id=course.id).order_by(Announcement.timestamp.desc()).all()
 
+    # Define the local timezone(replace it with your own if you need too)
+    local_timezone = pytz.timezone('America/Los_Angeles')
+
     print(role)
     return render_template(
         'main/feature.html',
@@ -119,7 +124,8 @@ def feature(course_name, section_name):
         assignments=course_assignments,
         completed_assignments=completed_course_assignments,
         course_announcements=course_announcements,
-        role=role
+        role=role,
+        local_timezone=local_timezone
     )
 
 

@@ -37,7 +37,7 @@ class Announcement(db.Model):
     content = db.Column(db.Text, nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
     instructor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    timestamp = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
+    timestamp = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(pytz.timezone('America/Los_Angeles')), nullable=False)
 
     course = db.relationship('Course', backref='announcements')
     instructor = db.relationship('User', backref='announcements')

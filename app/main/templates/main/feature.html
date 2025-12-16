@@ -43,7 +43,7 @@
             <strong>{{ announcement.title }}</strong><br>
             {{ announcement.content }}<br>
             <small>
-                Posted on {{ announcement.timestamp.strftime('%b, %d, %Y, %I:%M %p') }}
+                Posted on {{ announcement.timestamp.astimezone(local_timezone).strftime('%b, %d, %Y, %I:%M %p') }}
             </small>
         </li>
         {% endfor %}
