@@ -20,7 +20,7 @@ Navigate to the folder where you want to store the project and run:
 ```bash
 git clone https://github.com/addisionschleigh/CMPE131-Project.git
 cd CMPE131-Project
-
+```
 
 
 ## Test Instructions
