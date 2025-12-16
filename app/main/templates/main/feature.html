@@ -14,6 +14,33 @@
                     section_name=section,
                     role=role)}}">Add Assignment</a>
     {% endif %}
+
+    <hr>
+
+    <h2> Annoucements </h2>
+    {% if role == "instructor" %}
+        <a href="{{url_for('main.add_announcement', course_name=course, section_name=section) }}"
+           class="btn btn-primary">
+            Add Announcement
+        </a>
+{% endif %}
+
+{% if course_announcements %}
+    <ul>
+        {% for announcement in course_announcements %}
+        <li>
+            <strong>{{ announcement.title }}</strong><br>
+            {{ announcement.content }}<br>
+            <small>
+                Posted on {{ announcement.timestamp.strftime('%b, %d, %Y, %I:%M %p') }}
+            </small>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+<p> No announcements have been posted yet</p>
+{% endif %}
+
     {% if assignments %}
         <p>To Do</p>
         {% for assignment in assignments %}
