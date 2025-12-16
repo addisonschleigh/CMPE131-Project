@@ -232,3 +232,16 @@ def grade_assignment(course, section, assignment):
             break
 
     return redirect(request.referrer)
+
+@main_bp.route('/course/<course_name>/<section_name>/announcement/add')
+@login_required
+def add_announcement(course_name, section_name):
+    role = request.args.get('role')
+    if role != "instructor":
+        abort(403) # Only instructors can add announcements
+
+    return render_template(
+        'main/add_announcements.html',
+        course=course_name,
+        section=section_name
+    )
