@@ -11,11 +11,17 @@ LearnQuest is a full stack learning management system designed to make learning 
 - **Development Environment**: PyCharm
 
 ## Setup and Run
-In order to set up and run this program:
-1. Navigate to desired directory to clone directory
-2. Clone this directory (git clone https://github.com/addisonschleigh/CMPE131-Project.git)
-3. Make sure all extensions needed, as seen in requirements.txt, are installed
-4. Run program in the repository typing python run.py (or python3 run.py) into the terminal
+
+Follow these steps to set up the project and run the Flask web application. 
+
+### 1. Clone the repository
+
+Navigate to the folder where you want to store the project and run:
+```bash
+git clone https://github.com/addisionschleigh/CMPE131-Project.git
+cd CMPE131-Project
+
+
 
 ## Test Instructions
 1. First, be sure to register (login page)
