@@ -37,7 +37,15 @@ python3 -m venv .venv
   ```bash
     .\.venv\Scripts\activate
   ```
-  After activation, your terminal should show (.venv). 
+  After activation, your terminal should show (.venv).
+
+  ### 4. Install dependencies
+
+  Install all of the required packages from the requirements.txt:
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 
 ## Test Instructions
 1. First, be sure to register (login page)
