@@ -46,7 +46,13 @@ python3 -m venv .venv
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-
+requirements.txt should include: 
+```bash
+Flask==2.3.2
+Flask-Login==0.6.3
+Flask-WTF==1.1.1
+SQLAlchemy==2.0.21
+```
 ## Test Instructions
 1. First, be sure to register (login page)
 2. Log in, choose a role (ideal to start with instructor role)
