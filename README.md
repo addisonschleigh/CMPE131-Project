@@ -53,6 +53,11 @@ Flask-Login==0.6.3
 Flask-WTF==1.1.1
 SQLAlchemy==2.0.21
 ```
+### 5. Run the application
+If your main app file is run.py:
+```bash
+python run.py
+```
 ## Test Instructions
 1. First, be sure to register (login page)
 2. Log in, choose a role (ideal to start with instructor role)
