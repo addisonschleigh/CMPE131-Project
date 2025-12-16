@@ -58,6 +58,13 @@ If your main app file is run.py:
 ```bash
 python run.py
 ```
+Alternatively, if you are using Flask's built-in runner:
+```bash
+export FLASK_APP=run.py   # macOS/Linux
+$env:FLASK_APP="run.py"   # Windows PowerShell
+set FLASK_APP=run.py      # Windows Command Prompt
+flask run
+```
 ## Test Instructions
 1. First, be sure to register (login page)
 2. Log in, choose a role (ideal to start with instructor role)
