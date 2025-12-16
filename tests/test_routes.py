@@ -1,6 +1,27 @@
 from werkzeug.security import generate_password_hash
-from app.models import User, db
+from app.models import User, Course, db
 from app.main import routes as main_routes
+
+def test_register_success(client, app):
+    app.config["WTF_CSRF_ENABLED"] = False
+
+    resp = client.post(
+        "/auth/register",
+        data={
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "pw",
+            "confirm_password": "pw",
+        },
+        follow_redirects=True
+    )
+
+    assert resp.status_code == 200
+    assert b"registered successfully" in resp.data
+
+    from app.models import User
+    with app.app_context():
+        assert User.query.filter_by(username="newuser").first() is not None
 
 def test_index_page(client):
     resp = client.get("/")
@@ -9,7 +30,9 @@ def test_index_page(client):
 
 def create_test_user(app, username="teacher1", password="secret", role="instructor"):
     with app.app_context():
-        u = User(username=username, email=f"{username}@example.com")
+        u = User(
+            username=username,
+            email=f"{username}@example.com")
 
         # set password according to model API
         if hasattr(u, "set_password") and callable(getattr(u, "set_password")):
@@ -31,12 +54,36 @@ def create_test_user(app, username="teacher1", password="secret", role="instruct
     # return the id (NOT the detached model instance)
     return user_id
 
-def login_test_user(client, username="teacher1", password="secret", role="instructor"):
+def login_test_user(client, username, password, role="instructor"):
     return client.post(
         "/auth/login",
-        data={"username": username, "password": password, "role": role},
+        data={
+            "username": username,
+            "password": password,
+            "role": role
+        },
         follow_redirects=True
     )
+
+def test_protected_route_requires_login(client):
+    resp = client.get("/auth/course_enroll", follow_redirects=True)
+    assert resp.status_code == 200
+    assert b"Login" in resp.data
+
+def test_login_page_renders(client):
+    resp = client.get("/auth/login")
+    assert resp.status_code == 200
+    assert b"Login" in resp.data
+
+def test_logout_redirects(client, app):
+    app.config["WTF_CSRF_ENABLED"] = False
+
+    create_test_user(app, "u1", password="pw")
+    login_test_user(client, "u1", "pw")
+
+    resp = client.get("/auth/logout", follow_redirects=True)
+    assert resp.status_code == 200
+    assert b"Courses" in resp.data
 
 def test_add_course_authenticated(client, app):
     # create user in DB and get the id (int)
@@ -56,6 +103,32 @@ def test_add_course_authenticated(client, app):
 
     assert resp.status_code == 200
     assert b"Math" in resp.data
+
+def test_delete_course(client, app):
+    app.config["WTF_CSRF_ENABLED"] = False
+
+    create_test_user(app, "teacher", password="pw", role="instructor")
+    login_test_user(client, "teacher", "pw", role="instructor")
+
+    # Create course in DB and memory
+    with app.app_context():
+        c = Course(name="Math", section="1")
+        db.session.add(c)
+        db.session.commit()
+
+    from app.main import routes as main_routes
+    main_routes.courses["Math"] = "1"
+
+    resp = client.post(
+        "/course/Math/1/delete?role=instructor",
+        follow_redirects=True
+    )
+
+    assert resp.status_code == 200
+    assert "Math" not in main_routes.courses
+
+    with app.app_context():
+        assert Course.query.filter_by(name="Math").first() is None
 
 def test_assignment_add_via_form(client, app):
     # 1) create + commit a test user and sign client in via session
@@ -87,3 +160,58 @@ def test_assignment_add_via_form(client, app):
     # If you don't persist Course to DB, assert the in-memory courses dict:
 #    from app.main import routes as main_routes
 #    assert main_routes.courses.get("Math") == '1'  # or whatever shape you use
+
+def test_delete_assignment(client, app):
+    app.config["WTF_CSRF_ENABLED"] = False
+
+    create_test_user(app, "teacher", password="pw", role="instructor")
+    login_test_user(client, "teacher", "pw", role="instructor")
+
+    from app.main import routes as main_routes
+    main_routes.assignments_by_course["CS101"] = [
+        {"name": "HW1", "points": 10, "section": "1", "grade": ""}
+    ]
+
+    resp = client.post(
+        "/assignment/CS101/1/HW1/delete?role=instructor",
+        follow_redirects=True
+    )
+
+    assert resp.status_code == 200
+    assert main_routes.assignments_by_course["CS101"] == []
+
+def test_submit_assignment(client, app):
+    app.config["WTF_CSRF_ENABLED"] = False
+
+    create_test_user(app, "student", password="pw", role="student")
+    login_test_user(client, "student", "pw", role="student")
+
+    from app.main import routes as main_routes
+    main_routes.assignments_by_course["CS101"] = [
+        {"name": "HW1", "points": 20, "section": "1"}
+    ]
+
+    resp = client.post(
+        "/assignment/CS101/1/HW1/submit?role=student",
+        follow_redirects=True
+    )
+
+    assert resp.status_code == 200
+
+    # Assignment removed from active list
+    assert main_routes.assignments_by_course["CS101"] == []
+
+    # Assignment added to completed list
+    completed = main_routes.completed_assignments_by_course["CS101"][0]
+    assert completed["name"] == "HW1"
+    assert completed["section"] == "1"
+
+def test_search_course(client):
+    from app.main import routes as main_routes
+
+    main_routes.courses["Math"] = "1"
+
+    resp = client.get("/search?query=math")
+
+    assert resp.status_code == 200
+    assert b"Math" in resp.data
