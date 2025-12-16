@@ -65,7 +65,8 @@ $env:FLASK_APP="run.py"   # Windows PowerShell
 set FLASK_APP=run.py      # Windows Command Prompt
 flask run
 ```
-## Test Instructions
+Open your browser and go to: [
+](http://127.0.0.1:5000)## Test Instructions
 1. First, be sure to register (login page)
 2. Log in, choose a role (ideal to start with instructor role)
 3. Create course(s). These course(s) can also be deleted
