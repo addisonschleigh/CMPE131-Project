@@ -107,16 +107,28 @@ def index():
 @main_bp.route('/course/<course_name>/<section_name>')
 def feature(course_name, section_name):
     role = request.args.get('role')
+
     course_assignments = assignments_by_course.get(course_name, [])
     completed_course_assignments = completed_assignments_by_course.get(course_name, [])
 
-    course = Course.query.filter_by(name=course_name, section=section_name).first()
-    course_announcements = Announcement.query.filter_by(course_id=course.id).order_by(Announcement.timestamp.desc()).all()
+    course = Course.query.filter_by(
+        name=course_name,
+        section=section_name
+    ).first()
 
-    # Define the local timezone(replace it with your own if you need too)
+    # ✅ DEFENSIVE GUARD (critical)
+    if course:
+        course_announcements = (
+            Announcement.query
+            .filter_by(course_id=course.id)
+            .order_by(Announcement.timestamp.desc())
+            .all()
+        )
+    else:
+        course_announcements = []
+
     local_timezone = pytz.timezone('America/Los_Angeles')
 
-    print(role)
     return render_template(
         'main/feature.html',
         course=course_name,
