@@ -1,6 +1,11 @@
+from email.policy import default
+from time import timezone
+
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 class User(db.Model, UserMixin):
     id =  db.Column(db.Integer, primary_key=True)
@@ -24,3 +29,14 @@ class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     points = db.Column(db.Integer, nullable=False)
+
+class Announcement(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    timestamp = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
+
+    course = db.relationship('Course', backref='announcements')
+    instructor = db.relationship('User', backref='announcements')
