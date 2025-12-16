@@ -5,7 +5,7 @@ from ..forms import LoginForm
 from app import db
 from flask import current_app as myapp_obj
 
-from ..models import Course, Assignment
+from ..models import Course, Assignment, Announcement
 from ..models import User
 
 courses = {}
@@ -104,11 +104,23 @@ def index():
 
 @main_bp.route('/course/<course_name>/<section_name>')
 def feature(course_name, section_name):
-    role = request.args.get('role') or request.args.get('role')
+    role = request.args.get('role')
     course_assignments = assignments_by_course.get(course_name, [])
     completed_course_assignments = completed_assignments_by_course.get(course_name, [])
+
+    course = Course.query.filter_by(name=course_name, section=section_name).first()
+    course_announcements = Announcement.query.filter_by(course_id=course.id).order_by(Announcement.timestamp.desc()).all()
+
     print(role)
-    return render_template('main/feature.html', course=course_name, section=section_name, assignments=course_assignments, completed_assignments=completed_course_assignments, role=role)
+    return render_template(
+        'main/feature.html',
+        course=course_name,
+        section=section_name,
+        assignments=course_assignments,
+        completed_assignments=completed_course_assignments,
+        course_announcements=course_announcements,
+        role=role
+    )
 
 
 @main_bp.route('/course/<course_name>/<section_name>/delete', methods=['POST'])
@@ -233,15 +245,32 @@ def grade_assignment(course, section, assignment):
 
     return redirect(request.referrer)
 
-@main_bp.route('/course/<course_name>/<section_name>/announcement/add')
+@main_bp.route('/course/<course_name>/<section_name>/announcement/add', methods=['GET', 'POST'])
 @login_required
 def add_announcement(course_name, section_name):
     role = request.args.get('role')
     if role != "instructor":
-        abort(403) # Only instructors can add announcements
+        abort(403) # Only instructors can access
 
+    course = Course.query.filter_by(name=course_name, section=section_name).first()
+
+    if request.method == "POST":
+        # Grab the form data
+        title = request.form.get("title")
+        content = request.form.get("content")
+
+        # Create and save an announcement
+        announcement = Announcement(title=title, content=content, course_id=course.id, instructor_id=current_user.id)
+        db.session.add(announcement)
+        db.session.commit()
+
+        flash("Announcement posted successfully!", "success")
+        return redirect(url_for("main.feature", course_name=course_name, section_name=section_name, role=role))
+
+    # GET request --> show the form
     return render_template(
         'main/add_announcements.html',
         course=course_name,
-        section=section_name
+        section=section_name,
+        role=role
     )

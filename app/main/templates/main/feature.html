@@ -19,7 +19,7 @@
 
     <h2> Annoucements </h2>
     {% if role == "instructor" %}
-        <a href="{{url_for('main.add_announcement', course_name=course, section_name=section) }}"
+        <a href="{{url_for('main.add_announcement', course_name=course, section_name=section, role=role) }}"
            class="btn btn-primary">
             Add Announcement
         </a>
