@@ -4,7 +4,8 @@ from time import timezone
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timezone
+import pytz
 from flask_sqlalchemy import SQLAlchemy
 
 class User(db.Model, UserMixin):

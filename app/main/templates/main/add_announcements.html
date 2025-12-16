@@ -2,10 +2,7 @@
 {% block content %}
 
 <form method="POST"
-      action="{{ url_for('main.new_annoucement',
-      course_name=course,
-      section_name=section,
-      role=role) }}">
+      action="{{ url_for('main.add_announcement', course_name=course, section_name=section, role=role) }}">
 
     <label>Title</label><br>
     <input type="text" name="title" required><br><br>
