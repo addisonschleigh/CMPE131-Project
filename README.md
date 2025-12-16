@@ -21,7 +21,23 @@ Navigate to the folder where you want to store the project and run:
 git clone https://github.com/addisionschleigh/CMPE131-Project.git
 cd CMPE131-Project
 ```
+### 2. Create a virtual environment 
 
+Create a Python virtual environment to keep dependencies isolated:
+```bash
+python3 -m venv .venv
+```
+
+### 3. Activate the virtual environment
+- **macOS or Linux**:
+  ```bash
+  source .venv/bin/activate
+  ```
+- **Windows(Command Prompt)**:
+  ```bash
+    .\.venv\Scripts\activate
+  ```
+  After activation, your terminal should show (.venv). 
 
 ## Test Instructions
 1. First, be sure to register (login page)
