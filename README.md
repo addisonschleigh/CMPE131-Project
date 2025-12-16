@@ -66,6 +66,7 @@ set FLASK_APP=run.py      # Windows Command Prompt
 flask run
 ```
 Open your browser and go to: http://127.0.0.1:5000
+The application should be running locally on your machine
 ## Test Instructions
 1. First, be sure to register (login page)
 2. Log in, choose a role (ideal to start with instructor role)
