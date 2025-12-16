@@ -135,7 +135,6 @@ def delete_assignment(course_name, section_name, assignment_name):
     assignments_by_course[course_name] = [
         a for a in assignment_list if a["name"] != assignment_name
     ]
-    flash(f"Deleted '{assignment_name}'.", "success")
     return redirect(url_for('.feature', course_name=course_name, section_name=section_name, role=role))
 
 @main_bp.route('/assignment/<course_name>/<section_name>/<assignment_name>/submit', methods=['POST'])
@@ -232,9 +231,4 @@ def grade_assignment(course, section, assignment):
             a["grade"] = grade
             break
 
-    return redirect(url_for(
-        "main.feature",
-        course_name=course,
-        section_name=section,
-        role=role
-    ))
+    return redirect(request.referrer)
