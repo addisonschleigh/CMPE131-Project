@@ -56,6 +56,7 @@ WTForms==3.1.2
 SQLAlchemy==2.0.21
 pytest==9.0.2
 pytest-cov==7.0.0
+Werkzeug==2.3.7
 ```
 ### 5. Run the application
 If your main app file is run.py:
