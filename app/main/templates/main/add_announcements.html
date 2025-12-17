@@ -1,16 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form method="POST"
-      action="{{ url_for('main.add_announcement', course_name=course, section_name=section, role=role) }}">
+<div class="form-container">
+    <h2 class="form-title">📢 Add Announcement</h2>
 
-    <label>Title</label><br>
-    <input type="text" name="title" required><br><br>
+    <form method="POST"
+          action="{{ url_for('main.add_announcement',
+                              course_name=course,
+                              section_name=section,
+                              role=role) }}">
 
-    <label>Content</label><br>
-    <textarea name="content" rows="5" required></textarea><br><br>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title"
+                   type="text"
+                   name="title"
+                   placeholder="Enter announcement title"
+                   required>
+        </div>
 
-    <button type="submit">Post Annoucement</button>
-</form>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content"
+                      name="content"
+                      rows="6"
+                      placeholder="Write your announcement here..."
+                      required></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Post Announcement
+            </button>
+
+            <a href="{{ url_for('main.feature',
+                                course_name=course,
+                                section_name=section,
+                                role=role) }}"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

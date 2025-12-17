@@ -26,31 +26,49 @@
         </div>
         {% endif %}
     </div>
-<hr>
+<hr class="section-divider">
 
-    <h2> Annoucements </h2>
-    {% if role == "instructor" %}
-        <a href="{{url_for('main.add_announcement', course_name=course, section_name=section, role=role) }}"
+<div class="announcements">
+    <div class="announcements-header">
+        <h2>📢 Announcements</h2>
+
+        {% if role == "instructor" %}
+        <a href="{{ url_for('main.add_announcement',
+                            course_name=course,
+                            section_name=section,
+                            role=role) }}"
            class="btn btn-primary">
-            Add Announcement
+            + Add Announcement
         </a>
-{% endif %}
+        {% endif %}
+    </div>
 
-{% if course_announcements %}
-    <ul>
-        {% for announcement in course_announcements %}
-        <li>
-            <strong>{{ announcement.title }}</strong><br>
-            {{ announcement.content }}<br>
-            <small>
-                Posted on {{ announcement.timestamp.astimezone(local_timezone).strftime('%b, %d, %Y, %I:%M %p') }}
-            </small>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-<p> No announcements have been posted yet</p>
-{% endif %}
+    {% if course_announcements %}
+        <ul class="announcement-list">
+            {% for announcement in course_announcements %}
+            <li class="announcement-card">
+                <h3 class="announcement-title">
+                    {{ announcement.title }}
+                </h3>
+
+                <p class="announcement-content">
+                    {{ announcement.content }}
+                </p>
+
+                <span class="announcement-time">
+                    {{ announcement.timestamp
+                       .astimezone(local_timezone)
+                       .strftime('%b %d, %Y • %I:%M %p') }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">
+            No announcements have been posted yet.
+        </p>
+    {% endif %}
+</div>
     <!-- Active Assignments -->
     <div class="card">
         <h2>To Do</h2>
