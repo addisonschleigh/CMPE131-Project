@@ -132,4 +132,3 @@ def test_announcement_requires_title(app):
 
         with pytest.raises(Exception):
             db.session.commit()
-

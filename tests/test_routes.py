@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash
-from app.models import User, Course, db
+from app.models import User, Course, db, Announcement
 from app.main import routes as main_routes
 
 def test_register_success(client, app):
@@ -53,6 +53,12 @@ def create_test_user(app, username="teacher1", password="secret", role="instruct
 
     # return the id (NOT the detached model instance)
     return user_id
+def create_test_course(app, name="CS151", section="6"):
+    with app.app_context():
+        my_course = Course(name=name, section=section)
+        db.session.add(my_course)
+        db.session.commit()
+        return my_course.id
 
 def login_test_user(client, username, password, role="instructor"):
     return client.post(
@@ -242,3 +248,23 @@ def test_instructor_can_post_announcement(client, app):
     )
     assert response.status_code == 200
     assert b"Test the announcement" in response.data
+
+def test_student_cannot_post_announcement(client, app):
+    user_id = create_test_user(app, "student1")
+    create_test_course(app, "CS151", "6")
+
+    with client.session_transaction() as sess:
+        sess['_user_id'] = str(user_id)
+
+    response = client.post(
+        f"/course/CS151/6/announcement/add?role=student",
+        data = {
+            "title": "Invalid Post",
+            "content": "A student should not be able to post an announcement",
+        },
+        follow_redirects=True
+    )
+    assert response.status_code == 403
+    with app.app_context():
+        announcement = Announcement.query.filter_by(title="Invalid Post").first()
+        assert announcement is None
