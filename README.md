@@ -39,7 +39,7 @@ python3 -m venv .venv
   ```
   After activation, your terminal should show (.venv).
 
-  ### 4. Install dependencies
+### 4. Install dependencies
 
   Install all of the required packages from the requirements.txt:
 ```bash
