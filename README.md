@@ -51,7 +51,11 @@ requirements.txt should include:
 Flask==2.3.2
 Flask-Login==0.6.3
 Flask-WTF==1.1.1
+Flask-SQLAlchemy==3.1.1
+WTForms==3.1.2
 SQLAlchemy==2.0.21
+pytest==9.0.2
+pytest-cov==7.0.0
 ```
 ### 5. Run the application
 If your main app file is run.py:
