@@ -268,3 +268,22 @@ def test_student_cannot_post_announcement(client, app):
     with app.app_context():
         announcement = Announcement.query.filter_by(title="Invalid Post").first()
         assert announcement is None
+
+def test_instructor_can_view_add_announcement_form(client, app):
+    instructor_id = create_test_user(app, username="prof1", role="instructor")
+
+    with app.app_context():
+        course = Course(name="CS151", section="6")
+        db.session.add(course)
+        db.session.commit()
+        main_routes.courses["CS151"] = "6"
+
+    with client.session_transaction() as sess:
+        sess["_user_id"] = str(instructor_id)
+        sess["_fresh"] = True
+
+    response = client.get(
+        "/course/CS151/6/announcement/add?role=instructor"
+    )
+
+    assert response.status_code == 200
