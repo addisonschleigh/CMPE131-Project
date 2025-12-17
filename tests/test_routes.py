@@ -215,3 +215,30 @@ def test_search_course(client):
 
     assert resp.status_code == 200
     assert b"Math" in resp.data
+
+def test_instructor_can_post_announcement(client, app):
+    # Create a test user
+    instructor_id = create_test_user(app, username="prof1", password="helmet", role="instructor")
+
+    # Create the course
+    with app.app_context():
+        course = Course(name="CS151", section="6")
+        db.session.add(course)
+        db.session.commit()
+
+    # Mark the client as logged in
+    with client.session_transaction() as sess:
+        sess['_user_id'] = str(instructor_id) # has to be a string
+        sess['_fresh'] = True
+
+    # Post the announcement
+    response = client.post(
+        f"/course/CS151/6/announcement/add?role=instructor",
+        data = {
+            "title": "Test the announcement",
+            "content": "This is to test the announcement",
+        },
+        follow_redirects=True
+    )
+    assert response.status_code == 200
+    assert b"Test the announcement" in response.data

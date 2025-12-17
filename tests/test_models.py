@@ -2,6 +2,7 @@ from app.models import Course, Assignment, db, User
 from app.models import Announcement
 from datetime import datetime
 import pytz
+import pytest
 
 def test_course_model_create(app):
     c = Course(name="Math", section="1")
@@ -106,5 +107,29 @@ def test_announcement_auto_set_timestamp(app):
     assert announcement.timestamp is not None
     assert isinstance(announcement.timestamp, datetime)
 
+def test_announcement_requires_title(app):
+    with app.app_context():
+        instructor = User(
+            username="Prof3",
+            email="prof3@sjsu.edu"
+        )
+        instructor.set_password("GoldenKnight123!")
 
+        course = Course(
+            name="CS151",
+            section="6"
+        )
+        db.session.add_all([instructor, course])
+        db.session.commit()
+
+        bad_announcement = Announcement(
+            title=None,
+            content="Title is missing",
+            course_id = course.id,
+            instructor_id=instructor.id
+        )
+        db.session.add(bad_announcement)
+
+        with pytest.raises(Exception):
+            db.session.commit()
 
