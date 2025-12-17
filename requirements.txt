@@ -6,3 +6,4 @@ WTForms==3.1.2
 SQLAlchemy==2.0.21
 pytest==9.0.2
 pytest-cov==7.0.0
+pytz==2025.2
