@@ -638,3 +638,153 @@ div.class{
     font-weight: 500;
     color: #2563eb;
 }
+
+.section-divider {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Container */
+.announcements {
+    margin-top: 1.5rem;
+}
+
+/* Header */
+.announcements-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.announcements-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+/* Announcement list */
+.announcement-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Card */
+.announcement-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Title */
+.announcement-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+/* Content */
+.announcement-content {
+    margin: 0 0 0.75rem 0;
+    color: #444;
+}
+
+/* Timestamp */
+.announcement-time {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Empty state */
+.empty-state {
+    color: #777;
+    font-style: italic;
+}
+
+/* Button polish */
+.btn-primary {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.form-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+/* Inputs */
+.form-group input,
+.form-group textarea {
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3b7dc4;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #d2d2d2;
+}
