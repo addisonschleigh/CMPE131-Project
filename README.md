@@ -11,11 +11,66 @@ LearnQuest is a full stack learning management system designed to make learning 
 - **Development Environment**: PyCharm
 
 ## Setup and Run
-In order to set up and run this program:
-1. Navigate to desired directory to clone directory
-2. Clone this directory (git clone https://github.com/addisonschleigh/CMPE131-Project.git)
-3. Make sure all extensions needed, as seen in requirements.txt, are installed
-4. Run program in the repository typing python run.py (or python3 run.py) into the terminal
+
+Follow these steps to set up the project and run the Flask web application. 
+
+### 1. Clone the repository
+
+Navigate to the folder where you want to store the project and run:
+```bash
+git clone https://github.com/addisionschleigh/CMPE131-Project.git
+cd CMPE131-Project
+```
+### 2. Create a virtual environment 
+
+Create a Python virtual environment to keep dependencies isolated:
+```bash
+python3 -m venv .venv
+```
+
+### 3. Activate the virtual environment
+- **macOS or Linux**:
+  ```bash
+  source .venv/bin/activate
+  ```
+- **Windows(Command Prompt)**:
+  ```bash
+    .\.venv\Scripts\activate
+  ```
+  After activation, your terminal should show (.venv).
+
+### 4. Install dependencies
+
+  Install all of the required packages from the requirements.txt:
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+requirements.txt should include: 
+```bash
+Flask==2.3.2
+Flask-Login==0.6.3
+Flask-WTF==1.1.1
+Flask-SQLAlchemy==3.1.1
+WTForms==3.1.2
+SQLAlchemy==2.0.21
+pytest==9.0.2
+pytest-cov==7.0.0
+```
+### 5. Run the application
+If your main app file is run.py:
+```bash
+python run.py
+```
+Alternatively, if you are using Flask's built-in runner:
+```bash
+export FLASK_APP=run.py   # macOS/Linux
+$env:FLASK_APP="run.py"   # Windows PowerShell
+set FLASK_APP=run.py      # Windows Command Prompt
+flask run
+```
+- **Open your browser and go to: http://127.0.0.1:5000**
+- **The application should be running locally on your machine**
 
 ## Test Instructions
 1. First, be sure to register (login page)
