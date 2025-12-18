@@ -21,11 +21,11 @@ Navigate to the folder where you want to store the project and run:
 git clone https://github.com/addisionschleigh/CMPE131-Project.git
 cd CMPE131-Project
 ```
-### 2. Create a virtual environment 
+### 2. Create a virtual environment with Python 3.12 (make sure you have Python 3.12) 
 
 Create a Python virtual environment to keep dependencies isolated:
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 ```
 
 ### 3. Activate the virtual environment
